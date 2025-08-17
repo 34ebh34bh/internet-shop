@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\cart;
 use App\Models\Category;
 use App\Models\favorite;
+use App\Models\Order;
 use App\Models\prichina;
 use App\Models\supportform;
 use App\Models\Product;
@@ -193,4 +194,17 @@ class ProductController extends Controller
         $favorite->delete();
         return redirect()->back();
     }
+
+    public function order(Request $request, cart $cart) {
+
+        $product_price =  $cart->product->price * $cart->product->quantity;
+        order::create([
+            'user_id' => auth()->user()->id,
+            'price' => $product_price,
+            'status' => 'success',
+        ]);
+        $cart->delete();
+        return redirect()->route('index');
+    }
+
 }

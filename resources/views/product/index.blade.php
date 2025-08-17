@@ -39,7 +39,6 @@
     <input type="text" name="category" placeholder="category">
     <button type="submit">Найти</button>
 </form>
-
 <hr>
 
 @foreach($products as $product)

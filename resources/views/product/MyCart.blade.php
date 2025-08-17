@@ -18,20 +18,21 @@
                     @endif
                 </div>
 
-                {{-- Информация о товаре --}}
+                    <?php $total = $cart->product->price * $cart->quantity; ?>
+
                 <div class="col-md-6">
                     <div class="card-body">
                         <h5 class="card-title">{{ $cart->product->name }}</h5>
                         <p class="card-text text-muted">{{ $cart->product->description }}</p>
-                        <p class="card-text fw-bold">{{ number_format($cart->product->price * $cart->quantity , 0, ',', ' ') }} ₽</p>
+                        <p class="card-text fw-bold">{{ number_format($total , 0, ',', ' ') }} ₽</p>
                         <p class="card-text">
                             Количество: <strong>{{ $cart->quantity }}</strong>
                         </p>
                     </div>
                 </div>
 
-                {{-- Кнопки управления --}}
                 <div class="col-md-3 d-flex align-items-center justify-content-center">
+
                     <form action="{{route('DeleteCart',$cart->id)}}" method="POST">
                         @csrf
                         @method('DELETE')
@@ -44,6 +45,13 @@
                         </button>
                     </form>
                 </div>
+
+                <form action="{{route('order',$cart->id)}}" method="get">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger">купить</button>
+                </form>
+            </div>
+
             </div>
         </div>
     @empty

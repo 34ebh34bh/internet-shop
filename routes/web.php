@@ -66,6 +66,8 @@ Route::post('/my/favorites/{product}',[ProductController::class,'MaFavoritesStor
 
 Route::delete('delete/favorites/{favorite}',[ProductController::class,'DeleteFavorite'])->name('DeleteFavorite');
 
+Route::get('buy/{cart}',[ProductController::class,'order'])->name('order');
+
 Route::get('/register/page', [AuthController::class, 'RegisterPage'])->name('registerpage')->middleware('guest');
 Route::post('/register', [AuthController::class, 'Registerstore'])->name('Registerstore')->middleware('guest');
 
