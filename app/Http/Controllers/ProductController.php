@@ -16,9 +16,24 @@ use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
-    public function index(user $user)
+    public function index(Request $request ,user $user)
     {
-        $products = Product::all();
+        $ProductQuery = Product::query();
+
+        if ($request->filled('name')) {
+            $ProductQuery->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+
+        if ($request->filled('description')) {
+            $ProductQuery->where('description', 'like', '%' . $request->input('description') . '%');
+        }
+
+        if ($request->filled('category')) {
+            $ProductQuery->where('category_id', $request->input('category'));
+        }
+
+
+        $products = $ProductQuery->get();
         return view('product.index', compact('products', 'user'));
     }
 

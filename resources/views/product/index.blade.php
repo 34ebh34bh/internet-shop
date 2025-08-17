@@ -28,11 +28,19 @@
             <a href="{{route('registerpage')}}">Зарегистрироваться</a>
             <a href="{{route('login')}}">Войти</a>
         @endguest
-
-
         </div>
     </div>
 </div>
+
+<hr>
+<form action="{{ route('index') }}" method="get">
+    <input type="text" name="name" placeholder="Название">
+    <input type="text" name="description" placeholder="Описание">
+    <input type="text" name="category" placeholder="category">
+    <button type="submit">Найти</button>
+</form>
+
+<hr>
 
 @foreach($products as $product)
 <div class="container">
@@ -43,7 +51,7 @@
         <div class="card-content">
             <div class="card-title">{{$product->name}}</div>
             <div class="card-description">{{$product->description}}</div>
-            <div class="card-price">{{$product->category->category}}₽</div>
+            <div class="card-price">{{$product->category->category}}</div>
             <div class="card-price">{{$product->price}}₽</div>
             <a href="{{route('ShowProduct', $product->id)}}" class="buy-button">Подробнее</a>
         </div>
